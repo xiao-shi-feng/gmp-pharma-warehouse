@@ -17,7 +17,7 @@
 Claude Code 终端内执行：
 
 ```bash
-npx skills add shixiaofeng/gmp-pharma-warehouse@gmp-pharma-warehouse
+npx skills add xiao-shi-feng/gmp-pharma-warehouse@gmp-pharma-warehouse
 ```
 
 或者手动：
