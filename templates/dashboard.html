@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>仪表盘 - GMP 药品仓库管理 AI 系统</title>
+<link rel="stylesheet" href="/static/style.css">
+<style>
+/* 仪表盘专属样式 */
+.dashboard{padding:20px 0}
+.dash-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.dash-header h2{font-size:20px}
+.dash-nav{display:flex;gap:8px}
+.dash-nav a{padding:6px 16px;border:1px solid var(--border);border-radius:6px;color:var(--text2);text-decoration:none;font-size:13px;transition:all 0.2s}
+.dash-nav a:hover,.dash-nav a.active{border-color:var(--accent);color:var(--accent);background:rgba(59,130,246,0.06)}
+
+/* 统计卡片 */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:24px}
+.stat-card{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:16px}
+.stat-card .label{font-size:11px;color:var(--text3);margin-bottom:4px}
+.stat-card .value{font-size:28px;font-weight:700}
+.stat-card .value.green{color:var(--green)}
+.stat-card .value.red{color:var(--red)}
+.stat-card .value.yellow{color:var(--yellow)}
+.stat-card .value.blue{color:var(--accent)}
+.stat-card .sub{font-size:11px;color:var(--text3);margin-top:2px}
+
+/* 区域卡片 */
+.section-title{font-size:15px;font-weight:600;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.zone-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-bottom:24px}
+.zone-card{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;padding:16px;border-left:3px solid var(--border)}
+.zone-card.green{border-left-color:var(--green)}
+.zone-card.yellow{border-left-color:var(--yellow)}
+.zone-card.red{border-left-color:var(--red)}
+.zone-card .name{font-size:14px;font-weight:600;margin-bottom:4px}
+.zone-card .type{font-size:11px;color:var(--text3);margin-bottom:8px}
+.zone-card .temps{display:flex;gap:16px;font-size:13px}
+.zone-card .temps .temp{color:var(--accent)}
+.zone-card .temps .humi{color:var(--green)}
+.zone-card .desc{font-size:11px;color:var(--text3);margin-top:6px}
+
+/* 表格 */
+.table-wrap{overflow-x:auto;margin-bottom:24px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:10px 12px;color:var(--text3);font-weight:500;border-bottom:1px solid var(--border);font-size:11px;text-transform:uppercase;letter-spacing:0.5px}
+td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,0.04);color:var(--text2)}
+tr:hover td{background:rgba(255,255,255,0.02)}
+.status-approved{color:var(--green)}
+.status-rejected{color:var(--red)}
+.status-quarantine{color:var(--yellow)}
+
+/* 标签切换 */
+.tab-bar{display:flex;gap:4px;margin-bottom:16px}
+.tab-btn{padding:6px 14px;border:1px solid var(--border);border-radius:4px;background:transparent;color:var(--text3);font-size:12px;cursor:pointer;font-family:inherit;transition:all 0.2s}
+.tab-btn.active{background:rgba(59,130,246,0.1);border-color:var(--accent);color:var(--accent)}
+.tab-btn:hover:not(.active){color:var(--text2)}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">📊</span>
+        <div class="logo-text">
+          <h1>GMP 数据管理仪表盘</h1>
+          <span class="logo-sub">Warehouse Monitoring · Temperature · Batches</span>
+        </div>
+      </div>
+      <div class="header-stats" id="headerTime"></div>
+    </div>
+  </header>
+
+  <div class="main-layout">
+    <aside class="sidebar">
+      <div class="sidebar-header"><h3>导航</h3></div>
+      <nav class="module-nav">
+        <button class="module-item active" onclick="showSection('overview')">📊 总览</button>
+        <button class="module-item" onclick="showSection('zones')">🏭 仓库区域</button>
+        <button class="module-item" onclick="showSection('batches')">📦 物料批次</button>
+        <button class="module-item" onclick="showSection('alarms')">🔔 报警记录</button>
+        <button class="module-item" onclick="showSection('validations')">✅ 验证记录</button>
+        <button class="module-item" onclick="showSection('expiry')">⏰ 近效期</button>
+        <div style="border-top:1px solid var(--border);margin-top:8px;padding-top:8px">
+          <button class="module-item" onclick="location.href='/'">🔍 返回知识库</button>
+        </div>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      <div class="dashboard" id="dashboardContent">
+        <div class="loading">加载中...</div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="/static/dashboard.js"></script>
+</body>
+</html>

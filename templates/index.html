@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GMP 药品仓库管理 AI 系统</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="app">
+  <!-- 顶部导航 -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <span class="logo-icon">💊</span>
+        <div class="logo-text">
+          <h1>GMP 药品仓库管理 AI 系统</h1>
+          <span class="logo-sub">Knowledge Base · Search · Q&A</span>
+        </div>
+      </div>
+      <div class="header-stats" id="headerStats"></div>
+    </div>
+  </header>
+
+  <div class="main-layout">
+    <!-- 侧边栏：模块导航 -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <h3>知识模块</h3>
+        <span class="module-count" id="moduleCount"></span>
+      </div>
+      <nav class="module-nav" id="moduleNav"></nav>
+    </aside>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+      <!-- 搜索栏 -->
+      <div class="search-bar">
+        <div class="search-tabs">
+          <button class="search-tab active" data-mode="search" onclick="switchMode('search')">🔍 搜索</button>
+          <button class="search-tab" data-mode="ask" onclick="switchMode('ask')">💬 问答</button>
+        </div>
+        <div class="search-input-wrap">
+          <input type="text" id="searchInput" class="search-input"
+                 placeholder="输入关键词搜索 GMP/GSP 知识库..."
+                 autocomplete="off">
+          <button class="search-btn" onclick="doSearch()">搜索</button>
+        </div>
+        <div class="search-hints" id="searchHints"></div>
+      </div>
+
+      <!-- 搜索结果区 -->
+      <div class="results" id="results">
+        <div class="welcome" id="welcome">
+          <div class="welcome-icon">🏥</div>
+          <h2>GMP 药品仓库合规知识库</h2>
+          <p>覆盖 14 个知识模块，共 19 类专题内容</p>
+          <div class="welcome-modules" id="welcomeModules"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
