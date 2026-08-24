@@ -135,12 +135,30 @@ function loadData() {
 }
 
 // ============ 搜索 ============
+// 中文分词：整段作为词 + 双字组合兜底，让自然问句也能匹配
+function segmentQuery(q) {
+  var tokens = [];
+  var en = q.match(/[a-z0-9][a-z0-9 .\-]*/g) || [];
+  en.forEach(function(t){ tokens.push(t); });
+  var cnSegs = q.match(/[\u4e00-\u9fff]+/g) || [];
+  cnSegs.forEach(function(seg) {
+    if (tokens.indexOf(seg) === -1) tokens.push(seg);
+    if (seg.length >= 2) {
+      for (var i = 0; i < seg.length - 1; i++) {
+        var g = seg.substr(i, 2);
+        if (tokens.indexOf(g) === -1) tokens.push(g);
+      }
+    }
+  });
+  return { words: tokens };
+}
+
 function doSearch() {
   var q = document.getElementById('searchInput').value.trim();
   if (!q || !allModulesLoaded) return;
 
   var qLower = q.toLowerCase();
-  var qWords = qLower.match(/[\w\u4e00-\u9fff]+/g) || [];
+  var qWords = segmentQuery(qLower).words;
 
   var results = [];
   ENTRIES.forEach(function(e) {
