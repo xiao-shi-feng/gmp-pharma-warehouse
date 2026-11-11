@@ -1,0 +1,19 @@
+---
+name: 问题咨询
+about: 使用/配置/部署相关提问
+title: "[Question] "
+labels: ["question"]
+assignees: ""
+---
+
+## 问题
+你的问题是什么？
+
+## 已尝试
+你已经试过什么方法？
+
+## 环境
+- 部署方式: [GitHub Actions / 服务器 cron / 本地 / Docker]
+- 版本/Commit: 
+
+## 期望得到的帮助
