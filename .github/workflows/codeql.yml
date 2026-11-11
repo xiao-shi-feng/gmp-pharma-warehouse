@@ -7,6 +7,7 @@ on:
     branches: [main]
   schedule:
     - cron: '0 3 * * 1'  # 每周一 UTC 03:00
+  workflow_dispatch:
 
 permissions:
   security-events: write
@@ -22,7 +23,6 @@ jobs:
       fail-fast: false
       matrix:
         language: [python, javascript, typescript]
-        # 根据仓库实际语言调整，CodeQL 会自动跳过不存在的语言
 
     steps:
       - name: Checkout repository
